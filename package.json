@@ -1,0 +1,52 @@
+{
+  "name": "opensphere-build-closure-helper",
+  "version": "1.0.0",
+  "description": "Helper functions for working with opensphere-build-resolver and the Google Closure Compiler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package:update": "if git diff --name-only ORIG_HEAD HEAD | grep --quiet package.json; then npm update && npm install; fi",
+    "lint": "eslint *.js",
+    "release": "npm version $(conventional-recommended-bump -p angular) -m \"chore(release): %s\"",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s; git add CHANGELOG.md",
+    "postversion": "git push; git push --tags; npm publish",
+    "precommit": "npm run lint",
+    "commitmsg": "validate-commit-msg",
+    "postmerge": "npm run package:update",
+    "postrewrite": "npm run package:update"
+  },
+  "keywords": [
+    "opensphere",
+    "build",
+    "helper",
+    "closure",
+    "compiler"
+  ],
+  "author": "William Wall <wwall@caci.com>",
+  "maintainers": [
+    "William Wall <wwall@caci.com>",
+    "Kevin Schmidt <kschmidt@caci.com>"
+  ],
+  "license": "Apache-2.0",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "helpMessage": "\nPlease fix your commit message (consider using 'npm i -g commitizen'). Well-formatted commit messages allow us to automate our changelog and npm releases.\n\nExamples:\n\"fix(copy-view): Fixed an error when resolving paths for view directories\"\n\"feat(gcc): Added support for defines\"\n\nIf you have installed commitizen, try running 'git cz'."
+    }
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "google-closure-library": "^20161201.0.0"
+  },
+  "devDependencies": {
+    "conventional-changelog-cli": "^1.2.0",
+    "conventional-recommended-bump": "^0.3.0",
+    "cz-conventional-changelog": "^1.2.0",
+    "eslint": "^3.6.1",
+    "eslint-config-google": "^0.6.0",
+    "husky": "^0.13.3",
+    "validate-commit-msg": "^2.8.2"
+  }
+}
