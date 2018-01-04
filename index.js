@@ -6,8 +6,9 @@ const fs = require('fs');
 const path = require('path');
 
 const pythonCmd = 'python';
-const closureBuilder = path.join('google-closure-library', 'closure', 'bin',
-    'build', 'closurebuilder.py');
+
+const closureLibPath = path.dirname(require.resolve(path.join('google-closure-library', 'package.json')));
+const closureBuilder = path.join(closureLibPath, 'closure', 'bin', 'build', 'closurebuilder.py');
 
 /**
  * Create a Closure manifest.
@@ -18,22 +19,12 @@ const closureBuilder = path.join('google-closure-library', 'closure', 'bin',
 const createManifest = function(options, basePath) {
   basePath = basePath || options.basePath;
 
-  // if installed as a dependency, google-closure-library may be up a directory
-  var searchPaths = [
-    path.resolve(__dirname, 'node_modules', closureBuilder),
-    path.resolve(__dirname, '..', closureBuilder)
-  ];
-
-  var gcbPath = searchPaths.find(function(searchPath) {
-    return fs.existsSync(searchPath);
-  });
-
-  if (!gcbPath) {
+  if (!closureBuilder) {
     console.error('ERROR: Could not locate closurebuilder.py!');
     return Promise.resolve();
   }
 
-  var args = [gcbPath];
+  var args = [closureBuilder];
   args = args.concat(options.js.filter(function(path) {
     return path.indexOf('!') !== 0;
   }).map(function(path) {
@@ -64,7 +55,7 @@ const createManifest = function(options, basePath) {
       // the Python logging module logs to stderr by default, so even info
       // messages will appear in stderr. detect these and write them to the
       // console
-      if (data.startsWith(gcbPath)) {
+      if (data.startsWith(closureBuilder)) {
         console.log(data);
       } else {
         errorData += data;
