@@ -1,3 +1,11 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v1.0.0...v1.1.0) (2018-01-04)
+
+
+### Features
+
+* **closure:** Update Closure library to v20171203. ([4ebca2d](https://github.com/ngageoint/opensphere-build-closure-helper/commit/4ebca2d))
+
 <a name="0.2.0"></a>
 # 0.2.0 (2016-11-30)
 
@@ -28,6 +36,3 @@
 
 <a name="0.1.0"></a>
 # 0.1.0 (2016-11-10)
-
-
-
