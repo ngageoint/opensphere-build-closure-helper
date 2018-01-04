@@ -1,3 +1,11 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v1.1.0...v1.2.0) (2018-01-04)
+
+
+### Features
+
+* **node_modules:** Resolve node_modules paths with require. ([ef724b6](https://github.com/ngageoint/opensphere-build-closure-helper/commit/ef724b6))
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v1.0.0...v1.1.0) (2018-01-04)
 
