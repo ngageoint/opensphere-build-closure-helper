@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "google-closure-library": "^20171203.0.0"
+    "google-closure-library": "^20161201.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^1.0.0",
