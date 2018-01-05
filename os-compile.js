@@ -18,20 +18,24 @@ const compile = function(args) {
   return new Promise(function(resolve, reject) {
     let javaArgs = ['-jar', ClosureCompiler.COMPILER_PATH].concat(args);
 
-    const process = childProcess.spawn('java', javaArgs);
-    process.stdout.on('data', function(data) {
+    const javaProcess = childProcess.spawn('java', javaArgs);
+    javaProcess.stdout.on('data', function(data) {
       console.log(data.toString());
     });
 
-    process.stderr.on('data', function(data) {
+    javaProcess.stderr.on('data', function(data) {
       console.log(data.toString());
     });
 
-    process.on('error', function(err) {
+    javaProcess.on('error', function(err) {
       throw new Error('Closure Compiler failed: ' + (err.message || 'Unspecified error'));
     });
 
-    process.on('exit', function(code) {
+    javaProcess.on('exit', function(code) {
+      if (code) {
+        process.exit(code);
+      }
+
       resolve();
     });
   });
