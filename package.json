@@ -10,7 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "package:update": "if git diff --name-only ORIG_HEAD HEAD | grep --quiet package.json; then echo 'UPDATE: package.json changed, consider running yarn in your workspace root'; fi",
     "lint": "eslint *.js",
-    "precommit": "npm run lint",
     "semantic-release": "semantic-release"
   },
   "keywords": [
@@ -32,6 +31,7 @@
   "license": "Apache-2.0",
   "husky": {
     "hooks": {
+      "pre-commit": "npm run lint",
       "commit-msg": "validate-commit-msg"
     }
   },
