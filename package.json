@@ -64,8 +64,8 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "google-closure-compiler": "^20171203.0.0",
-    "google-closure-library": "^20171203.0.0"
+    "google-closure-compiler": "^20190415.0.0",
+    "google-closure-library": "^20190415.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.2",
