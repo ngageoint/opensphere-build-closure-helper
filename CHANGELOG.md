@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v1.3.1...v2.0.0) (2019-05-01)
+
+
+### Features
+
+* **compiler:** Upgrade compiler/library to 20190415. ([81baa0b](https://github.com/ngageoint/opensphere-build-closure-helper/commit/81baa0b))
+
+
+### BREAKING CHANGES
+
+* **compiler:** Projects must be compliant with compiler checks for v20190415.0.0.
+
 ## [1.3.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v1.3.0...v1.3.1) (2019-05-01)
 
 
