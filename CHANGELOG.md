@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v1.3.0...v1.3.1) (2019-05-01)
+
+
+### Bug Fixes
+
+* **compiler:** Pin compiler version. ([0fd58cf](https://github.com/ngageoint/opensphere-build-closure-helper/commit/0fd58cf))
+
 # [1.3.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v1.2.1...v1.3.0) (2019-04-30)
 
 
