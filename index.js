@@ -1,5 +1,6 @@
 'use strict';
 
+const Compiler = require('google-closure-compiler').compiler;
 const Promise = require('bluebird');
 const childProcess = require('child_process');
 const fs = require('fs');
@@ -9,6 +10,26 @@ const pythonCmd = 'python';
 
 const closureLibPath = path.dirname(require.resolve(path.join('google-closure-library', 'package.json')));
 const closureBuilder = path.join(closureLibPath, 'closure', 'bin', 'build', 'closurebuilder.py');
+
+/**
+ * Run the Closure Compiler with the provided options.
+ * @param {Object} options The compiler options.
+ * @return {Promise} A promise that resolves when compilation is finished.
+ */
+const compile = function(options) {
+  const compiler = new Compiler(options);
+  return new Promise(function(resolve, reject) {
+    compiler.run((exitCode, stdOut, stdErr) => {
+      if (exitCode) {
+        process.stderr.write(stdErr, () => reject(exitCode));
+      } else {
+        process.stderr.write(stdErr);
+        process.stdout.write(stdOut);
+        resolve();
+      }
+    });
+  });
+};
 
 /**
  * Create a Closure manifest.
@@ -135,6 +156,7 @@ const readManifest = function(manifestPath, optBasePath) {
 };
 
 module.exports = {
+  compile: compile,
   createManifest: createManifest,
   fileToLines: fileToLines,
   readManifest: readManifest
