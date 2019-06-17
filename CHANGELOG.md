@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v2.0.0...v3.0.0) (2019-06-17)
+
+
+### Features
+
+* **compile:** Use the compiler's JS API instead of invoking a Java process. ([1ceb89f](https://github.com/ngageoint/opensphere-build-closure-helper/commit/1ceb89f))
+
+
+### BREAKING CHANGES
+
+* **compile:** The os-compile executable now requires a path to the Closure Compiler options as a JSON file, instead of a list of arguments for the Java compiler.
+
 # [2.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v1.3.1...v2.0.0) (2019-05-01)
 
 
