@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v3.0.0...v3.0.1) (2019-07-04)
+
+
+### Bug Fixes
+
+* **compile:** Exit the process when the compiler fails. ([ae9f68a](https://github.com/ngageoint/opensphere-build-closure-helper/commit/ae9f68a))
+
 # [3.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v2.0.0...v3.0.0) (2019-06-17)
 
 
