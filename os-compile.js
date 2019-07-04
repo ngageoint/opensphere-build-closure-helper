@@ -10,4 +10,5 @@ if (process.argv.length < 3) {
   process.exit(1);
 }
 
-compile(require(path.resolve(process.cwd(), process.argv[2])));
+compile(require(path.resolve(process.cwd(), process.argv[2])))
+    .then(undefined, () => process.exit(1));
