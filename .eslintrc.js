@@ -14,6 +14,8 @@ module.exports = {
     // their complements.
     "no-negated-condition": "off",
     // allow use of var
-    "no-var": "off"
+    "no-var": "off",
+    // allow rejecting a promise without an error
+    "prefer-promise-reject-errors": "off"
   }
 };
