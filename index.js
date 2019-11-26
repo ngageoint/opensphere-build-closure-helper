@@ -3,13 +3,15 @@
 const Compiler = require('google-closure-compiler').compiler;
 const Promise = require('bluebird');
 const childProcess = require('child_process');
-const fs = require('fs');
+const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
 
 const pythonCmd = 'python';
 
 const closureLibPath = path.dirname(require.resolve(path.join('google-closure-library', 'package.json')));
+const closureSrcPath = path.join(closureLibPath, 'closure', 'goog');
 const closureBuilder = path.join(closureLibPath, 'closure', 'bin', 'build', 'closurebuilder.py');
+const depsWriter = path.join(closureLibPath, 'closure', 'bin', 'build', 'depsWriter.py');
 
 /**
  * Run the Closure Compiler with the provided options.
@@ -40,7 +42,7 @@ const compile = function(options) {
 const createManifest = function(options, basePath) {
   basePath = basePath || options.basePath;
 
-  if (!closureBuilder) {
+  if (!closureBuilder || !fs.existsSync(closureBuilder)) {
     console.error('ERROR: Could not locate closurebuilder.py!');
     return Promise.resolve();
   }
@@ -155,8 +157,98 @@ const readManifest = function(manifestPath, optBasePath) {
   return files;
 };
 
+/**
+ * Writes a debug application loader that defines Closure dependencies and bootstraps the application.
+ * @param {Object} options The Closure compiler options.
+ * @param {string} outputFile The output file.
+ * @return {Promise} A promise that resolves when the file is written.
+ */
+const writeDebugLoader = function(options, outputFile) {
+  if (!depsWriter || !fs.existsSync(depsWriter)) {
+    console.error('ERROR: Could not locate depswriter.py!');
+    return Promise.resolve();
+  }
+
+  var args = [depsWriter];
+  args = args.concat(options.js.filter(function(jsPath) {
+    // the closure library provides its own deps file
+    return jsPath.indexOf('!') !== 0 && jsPath.indexOf('google-closure-library') === -1;
+  }).map(function(jsPath) {
+    jsPath = jsPath.replace(/\*\*\.js$/, '');
+
+    const relPath = path.relative(closureSrcPath, jsPath);
+    return `--root_with_prefix=${jsPath} ${relPath}`;
+  }));
+
+  return new Promise(function(resolve, reject) {
+    console.log('Creating debug application loader...');
+    console.log(pythonCmd, args);
+
+    var process = childProcess.spawn(pythonCmd, args);
+    var errorData = '';
+    var outputData = '';
+
+    // listen for source files
+    process.stdout.on('data', function(data) {
+      outputData += data.toString();
+    });
+
+    // listen for source files
+    process.stderr.on('data', function(data) {
+      data = data.toString().trim();
+
+      // the Python logging module logs to stderr by default, so even info
+      // messages will appear in stderr. detect these and write them to the
+      // console
+      if (data.startsWith(depsWriter)) {
+        console.log(data);
+      } else {
+        errorData += data;
+      }
+    });
+
+    process.on('error', function(err) {
+      console.error('ERROR: Failed creating debug application loader:');
+
+      if (err.code === 'ENOENT') {
+        console.error('Python not found in path.');
+      } else {
+        console.error(err.message || 'Deps writer process failed.');
+      }
+
+      reject();
+    });
+
+    // handle python script complete
+    process.on('exit', function(code) {
+      if (code) {
+        console.error('ERROR: failed to create debug application loader');
+        console.error(errorData);
+        reject();
+      }
+
+      // bootstrap each entry_point namespace to load the application
+      var bootstrapNamespaces = options.entry_point.map(function(entry) {
+        return `'${entry.replace(/^goog:/, '')}'`;
+      }).join(',');
+      var bootstrapJs = `goog.bootstrap([${bootstrapNamespaces}]);`;
+
+      var fileContent = [
+        outputData,
+        // force goog.modules to wait for legacy goog.provide files to load
+        'goog.Dependency.defer_ = true;',
+        bootstrapJs
+      ];
+
+      console.log('Writing ' + outputFile);
+      fs.writeFileAsync(outputFile, fileContent.join('\n')).then(resolve, reject);
+    });
+  });
+};
+
 module.exports = {
   compile: compile,
+  writeDebugLoader: writeDebugLoader,
   createManifest: createManifest,
   fileToLines: fileToLines,
   readManifest: readManifest
