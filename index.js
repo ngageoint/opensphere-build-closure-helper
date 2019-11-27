@@ -12,7 +12,7 @@ const closureLibPath = path.dirname(require.resolve(path.join('google-closure-li
 const closureSrcPath = path.join(closureLibPath, 'closure', 'goog');
 const closureBinPath = path.join(closureLibPath, 'closure', 'bin', 'build');
 const closureBuilder = path.join(closureBinPath, 'closurebuilder.py');
-const depsWriter = path.join(closureBinPath, 'depsWriter.py');
+const depsWriter = path.join(closureBinPath, 'depswriter.py');
 
 /**
  * Run the Closure Compiler with the provided options.
@@ -44,8 +44,7 @@ const createManifest = function(options, basePath) {
   basePath = basePath || options.basePath;
 
   if (!closureBuilder || !fs.existsSync(closureBuilder)) {
-    console.error('ERROR: Could not locate closurebuilder.py!');
-    return Promise.resolve();
+    return Promise.reject('Could not locate closurebuilder.py!');
   }
 
   const roots = options.js.filter(notExclude).map(mapRoot);
@@ -100,8 +99,7 @@ const readManifest = function(manifestPath, optBasePath) {
  */
 const writeDebugLoader = function(options, outputFile) {
   if (!depsWriter || !fs.existsSync(depsWriter)) {
-    console.error('ERROR: Could not locate depswriter.py!');
-    return Promise.resolve();
+    return Promise.reject('Could not locate depswriter.py!');
   }
 
   const roots = options.js.filter(notExclude).filter(notGoog).map(mapRootWithPrefix);
