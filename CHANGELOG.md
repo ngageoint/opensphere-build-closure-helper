@@ -1,3 +1,21 @@
+# [4.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v3.0.1...v4.0.0) (2019-11-27)
+
+
+### Bug Fixes
+
+* **goog:** reject promise if closure scripts cannot be found ([c05b35c](https://github.com/ngageoint/opensphere-build-closure-helper/commit/c05b35c1cfaaafb3dfc9abdab510a149def0c758))
+
+
+### Features
+
+* **debug:** create an app loader that uses the gcc debug loader ([f7afbf7](https://github.com/ngageoint/opensphere-build-closure-helper/commit/f7afbf71fcfdbf8f267397e824003dd5904e4511))
+
+
+### BREAKING CHANGES
+
+* **goog:** Builds will now fail if they attempt to run closurebuilder.py
+or depswriter.py and the script cannot be found.
+
 ## [3.0.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v3.0.0...v3.0.1) (2019-07-04)
 
 
