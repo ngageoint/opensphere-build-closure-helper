@@ -122,9 +122,6 @@ const writeDebugLoader = function(options, outputFile) {
     console.log('Writing ' + outputFile);
 
     return fs.writeFileAsync(outputFile, fileContent.join('\n'));
-  }, function(error) {
-    console.error('ERROR: Failed creating debug application loader:');
-    console.error(error);
   });
 };
 
