@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#
+# This file has been modified from the original to support ES6 modules using
+# goog.declareModuleId.
+#
+# Modifications Copyright 2021 OpenSphere Authors
+#
 
 """Scans a source JS file for its provided and required namespaces.
 

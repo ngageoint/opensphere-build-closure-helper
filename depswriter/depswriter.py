@@ -14,6 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#
+# This file has been modified from the original to support ES6 modules.
+#
+# Modifications Copyright 2019 OpenSphere Authors
+#
+
 
 """Generates out a Closure deps.js file given a list of JavaScript sources.
 
