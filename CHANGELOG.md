@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.0...v4.0.1) (2019-12-09)
+
+
+### Bug Fixes
+
+* **debug:** allow the caller to handle debug loader rejection ([01e9a89](https://github.com/ngageoint/opensphere-build-closure-helper/commit/01e9a89ad460dfd1aba0fcaa8d889f9f578abb1c))
+
 # [4.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v3.0.1...v4.0.0) (2019-11-27)
 
 
