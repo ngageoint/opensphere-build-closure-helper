@@ -111,9 +111,12 @@ const writeDebugLoader = function(options, outputFile) {
     // bootstrap each entry_point namespace to load the application
     const bootstrapNamespaces = options.entry_point.map(mapBootstrapNamespace).join(',');
     const bootstrapJs = `goog.bootstrap([${bootstrapNamespaces}]);`;
+    const loaderMixin = fs.readFileSync(path.join(__dirname, 'loadermixin.js'), 'utf8');
 
     const fileContent = [
       output,
+      // rate limit how many scripts are loaded at once
+      loaderMixin,
       // force goog.modules to wait for legacy goog.provide files to load
       'goog.Dependency.defer_ = true;',
       bootstrapJs
