@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.1...v4.0.2) (2020-01-02)
+
+
+### Bug Fixes
+
+* **debug:** patch goog debug loader to throttle dependencies ([975c1e5](https://github.com/ngageoint/opensphere-build-closure-helper/commit/975c1e556be31c7307d7e5d80d2bb27c3923bde1))
+
 ## [4.0.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.0...v4.0.1) (2019-12-09)
 
 
