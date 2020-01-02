@@ -110,10 +110,35 @@ const writeDebugLoader = function(options, outputFile) {
   return execPythonCmd(args).then(function(output) {
     // bootstrap each entry_point namespace to load the application
     const bootstrapNamespaces = options.entry_point.map(mapBootstrapNamespace).join(',');
+
+    // TODO: remove when https://github.com/google/closure-library/issues/1004 is addressed
+    const depLoadThrottleMixin = `(function() {
+goog.DebugLoader_.prototype.maxLoading_ = 500;
+
+var origLoadDeps = goog.DebugLoader_.prototype.loadDeps_;
+goog.DebugLoader_.prototype.loadDeps_ = function() {
+  origLoadDeps.call(this);
+
+  if (this.loadingDeps_.length >= this.maxLoading_) {
+    this.pause_();
+  }
+};
+
+var origLoaded = goog.DebugLoader_.prototype.loaded_;
+goog.DebugLoader_.prototype.loaded_ = function(dep) {
+  origLoaded.call(this, dep);
+
+  if (this.paused_ && this.loadingDeps_.length < this.maxLoading_) {
+    this.resume_();
+  }
+};
+})();`;
+
     const bootstrapJs = `goog.bootstrap([${bootstrapNamespaces}]);`;
 
     const fileContent = [
       output,
+      depLoadThrottleMixin,
       // force goog.modules to wait for legacy goog.provide files to load
       'goog.Dependency.defer_ = true;',
       bootstrapJs
