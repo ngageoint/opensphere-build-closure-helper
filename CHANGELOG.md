@@ -1,3 +1,10 @@
+## [4.0.3](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.2...v4.0.3) (2020-01-20)
+
+
+### Bug Fixes
+
+* **goog:** prevent modules from replacing an existing legacy namespace ([0ab60c2](https://github.com/ngageoint/opensphere-build-closure-helper/commit/0ab60c2724a2fc47e2ce2dd7d9099ba97e860fc8))
+
 ## [4.0.2](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.1...v4.0.2) (2020-01-02)
 
 
