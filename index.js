@@ -134,11 +134,52 @@ goog.DebugLoader_.prototype.loaded_ = function(dep) {
 };
 })();`;
 
+    //
+    // If the module namespace already exists on window, Closure will wipe it out with the module's exports. This will
+    // drop anything previously loaded in the namespace. To fix this problem, use the existing object from window as
+    // the module exports.
+    //
+    const assignExportsMixin = `(function() {
+var googModuleRegexp = /goog\\.module\\('([^']+)'\\)/;
+var getExistingExports = function(source) {
+  var match = arguments[0].match(googModuleRegexp);
+  var moduleName = match != null && match.length === 2 ? match[1] : undefined;
+  if (moduleName) {
+    var moduleParts = moduleName.split('.');
+    var current = window;
+    while(current.hasOwnProperty(moduleParts[0])) {
+      current = current[moduleParts[0]];
+      moduleParts.shift();
+      if (!moduleParts.length) {
+        return current;
+      }
+    }
+  }
+  return undefined;
+};
+
+goog.loadModuleFromSource_ = /** @type {function(string):?} */ (function() {
+  'use strict';
+  var __existingExports__ = getExistingExports(arguments[0]);
+  var exports = __existingExports__ || {};
+  eval(arguments[0]);
+
+  // if "exports" was reassigned to an Object, merge the new exports into the existing object and return that
+  if (__existingExports__ && exports !== __existingExports__ && Object.getPrototypeOf(exports) === Object.prototype) {
+    Object.assign(__existingExports__, exports);
+    exports = __existingExports__;
+  }
+
+  return exports;
+});
+})();`;
+
     const bootstrapJs = `goog.bootstrap([${bootstrapNamespaces}]);`;
 
     const fileContent = [
       output,
       depLoadThrottleMixin,
+      assignExportsMixin,
       // force goog.modules to wait for legacy goog.provide files to load
       'goog.Dependency.defer_ = true;',
       bootstrapJs
