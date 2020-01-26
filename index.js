@@ -135,21 +135,17 @@ goog.DebugLoader_.prototype.loaded_ = function(dep) {
 })();`;
 
     //
-    // If the module namespace already exists on window, Closure will wipe it out with the module's exports. This will
-    // drop anything previously loaded in the namespace. To fix this problem, use the existing object from window as
-    // the module exports.
+    // If the module namespace already exists on window, goog.module.declareLegacyNamespace will cause the loader to
+    // replace the existing object with the module's exports. This will drop anything previously loaded in the
+    // namespace. To fix this problem, use the existing object from window as the module exports.
     //
     const assignExportsMixin = `(function() {
-var googModuleRegexp = /goog\\.module\\('([^']+)'\\)/;
-var getExistingExports = function(source) {
-  var match = arguments[0].match(googModuleRegexp);
-  var moduleName = match != null && match.length === 2 ? match[1] : undefined;
-  if (moduleName) {
-    var moduleParts = moduleName.split('.');
+var getExistingExports = function() {
+  if (goog.moduleLoaderState_.moduleName) {
+    var moduleParts = goog.moduleLoaderState_.moduleName.split('.');
     var current = window;
-    while(current.hasOwnProperty(moduleParts[0])) {
-      current = current[moduleParts[0]];
-      moduleParts.shift();
+    while (moduleParts.length && current.hasOwnProperty(moduleParts[0])) {
+      current = current[moduleParts.shift()];
       if (!moduleParts.length) {
         return current;
       }
@@ -160,12 +156,14 @@ var getExistingExports = function(source) {
 
 goog.loadModuleFromSource_ = /** @type {function(string):?} */ (function() {
   'use strict';
-  var __existingExports__ = getExistingExports(arguments[0]);
-  var exports = __existingExports__ || {};
+  var exports = {};
   eval(arguments[0]);
 
-  // if "exports" was reassigned to an Object, merge the new exports into the existing object and return that
-  if (__existingExports__ && exports !== __existingExports__ && Object.getPrototypeOf(exports) === Object.prototype) {
+  // if declareLegacyNamespace was called, the module's exports will be set at the module's namespace on the global
+  // window object. if that object already exists, merge the exports into it and set that as the exports.
+  var __existingExports__ = getExistingExports();
+  if (goog.moduleLoaderState_.declareLegacyNamespace && __existingExports__ &&
+      Object.getPrototypeOf(exports) === Object.prototype) {
     Object.assign(__existingExports__, exports);
     exports = __existingExports__;
   }
