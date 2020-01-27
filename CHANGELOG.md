@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.3...v4.0.4) (2020-01-27)
+
+
+### Bug Fixes
+
+* **goog:** only merge exports if declareLegacyNamespace called ([dec8cee](https://github.com/ngageoint/opensphere-build-closure-helper/commit/dec8ceeb142ed827a5c34bfc845f40c5d73a1d05))
+
 ## [4.0.3](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.2...v4.0.3) (2020-01-20)
 
 
