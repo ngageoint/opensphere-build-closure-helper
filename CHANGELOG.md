@@ -1,3 +1,10 @@
+## [4.0.5](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.4...v4.0.5) (2020-01-31)
+
+
+### Bug Fixes
+
+* **goog:** resolve the closure library from the cwd first ([a2a8589](https://github.com/ngageoint/opensphere-build-closure-helper/commit/a2a85894ec8694536b6baf695d33b6463029c5cd))
+
 ## [4.0.4](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.3...v4.0.4) (2020-01-27)
 
 
