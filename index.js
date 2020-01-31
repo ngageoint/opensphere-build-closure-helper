@@ -8,7 +8,10 @@ const path = require('path');
 
 const pythonCmd = 'python';
 
-const closureLibPath = path.dirname(require.resolve(path.join('google-closure-library', 'package.json')));
+const closureLibPath = path.dirname(require.resolve(path.join('google-closure-library', 'package.json'), {
+  // try cwd first to get the version required by the application
+  paths: [process.cwd(), __dirname]
+}));
 const closureSrcPath = path.join(closureLibPath, 'closure', 'goog');
 const closureBinPath = path.join(closureLibPath, 'closure', 'bin', 'build');
 const closureBuilder = path.join(closureBinPath, 'closurebuilder.py');
