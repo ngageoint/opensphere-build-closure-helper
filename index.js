@@ -23,6 +23,9 @@ const depsWriter = path.join(closureBinPath, 'depswriter.py');
  * @return {Promise} A promise that resolves when compilation is finished.
  */
 const compile = function(options) {
+  const gccPackage = require('google-closure-compiler/package.json');
+  console.log(`Closure Compiler version: ${gccPackage.version}`);
+
   const compiler = new Compiler(options);
   return new Promise(function(resolve, reject) {
     compiler.run((exitCode, stdOut, stdErr) => {
