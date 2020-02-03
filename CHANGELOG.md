@@ -1,3 +1,18 @@
+# [5.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.5...v5.0.0) (2020-02-03)
+
+
+### Features
+
+* **gcc:** display compiler version when compiling ([e892fd0](https://github.com/ngageoint/opensphere-build-closure-helper/commit/e892fd0660cafbd7ae4b51a66f48dc3411102e14))
+* **goog:** update closure compiler to latest ([c16642a](https://github.com/ngageoint/opensphere-build-closure-helper/commit/c16642a54fed48efe7e68477ef58d631f0b3e5b9))
+
+
+### BREAKING CHANGES
+
+* **goog:** The Closure Compiler update changes available error
+groups. This requires opensphere-build-resolver@7.0.0. The compiler
+update may also report new errors in compiled code.
+
 ## [4.0.5](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.4...v4.0.5) (2020-01-31)
 
 
