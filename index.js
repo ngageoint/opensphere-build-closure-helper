@@ -1,6 +1,7 @@
 'use strict';
 
 const Compiler = require('google-closure-compiler').compiler;
+const {getNativeImagePath} = require('google-closure-compiler/lib/utils');
 const Promise = require('bluebird');
 const childProcess = require('child_process');
 const fs = Promise.promisifyAll(require('fs'));
@@ -27,6 +28,22 @@ const compile = function(options) {
   console.log(`Closure Compiler version: ${gccPackage.version}`);
 
   const compiler = new Compiler(options);
+
+  // use native versions so we don't have a dep on Java
+  compiler.JAR_PATH = null;
+  compiler.javaPath = getNativeImagePath();
+
+  if (!compiler.javaPath) {
+    const platformMap = {
+      'linux': 'linux',
+      'darwin': 'osx',
+      'win32': 'windows'
+    };
+
+    const platform = platformMap[process.platform];
+    throw new Error(`Could not find google-closure-compiler-${platform}/compiler`);
+  }
+
   return new Promise(function(resolve, reject) {
     compiler.run((exitCode, stdOut, stdErr) => {
       if (exitCode) {
