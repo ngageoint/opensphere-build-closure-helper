@@ -30,10 +30,12 @@ const compile = function(options) {
   const compiler = new Compiler(options);
 
   // use native versions so we don't have a dep on Java
-  compiler.JAR_PATH = null;
-  compiler.javaPath = getNativeImagePath();
+  const nativePath = getNativeImagePath();
 
-  if (!compiler.javaPath) {
+  if (nativePath) {
+    compiler.JAR_PATH = null;
+    compiler.javaPath = nativePath;
+  } else {
     const platformMap = {
       'linux': 'linux',
       'darwin': 'osx',
@@ -41,7 +43,7 @@ const compile = function(options) {
     };
 
     const platform = platformMap[process.platform];
-    throw new Error(`Could not find google-closure-compiler-${platform}/compiler`);
+    console.warn(`Could not find google-closure-compiler-${platform}/compiler! Falling back to Java version.`);
   }
 
   return new Promise(function(resolve, reject) {
