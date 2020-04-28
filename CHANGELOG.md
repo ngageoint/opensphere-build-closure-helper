@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v5.0.0...v5.0.1) (2020-04-28)
+
+
+### Bug Fixes
+
+* keep java version as fallback ([4bcb237](https://github.com/ngageoint/opensphere-build-closure-helper/commit/4bcb2373818bfee8b92c1540a2e2ea1cb2a1d812))
+
 # [5.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v4.0.5...v5.0.0) (2020-02-03)
 
 
