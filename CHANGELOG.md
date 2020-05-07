@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v5.0.1...v5.1.0) (2020-05-07)
+
+
+### Features
+
+* gate native compiler use on env ([7c47d29](https://github.com/ngageoint/opensphere-build-closure-helper/commit/7c47d292bd7de3e47fca8895fec9e88fa16ec806))
+
 ## [5.0.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v5.0.0...v5.0.1) (2020-04-28)
 
 
