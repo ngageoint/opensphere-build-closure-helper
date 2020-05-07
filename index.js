@@ -29,21 +29,25 @@ const compile = function(options) {
 
   const compiler = new Compiler(options);
 
-  // use native versions so we don't have a dep on Java
-  const nativePath = getNativeImagePath();
+  const useNative = !!process.env.OPENSPHERE_CLOSURE_USE_NATIVE;
+  if (useNative) {
+    // Use native build of compiler to avoid a Java dependency. This is
+    // slightly slower for large numbers of files
+    const nativePath = getNativeImagePath();
 
-  if (nativePath) {
-    compiler.JAR_PATH = null;
-    compiler.javaPath = nativePath;
-  } else {
-    const platformMap = {
-      'linux': 'linux',
-      'darwin': 'osx',
-      'win32': 'windows'
-    };
+    if (nativePath) {
+      compiler.JAR_PATH = null;
+      compiler.javaPath = nativePath;
+    } else {
+      const platformMap = {
+        'linux': 'linux',
+        'darwin': 'osx',
+        'win32': 'windows'
+      };
 
-    const platform = platformMap[process.platform];
-    console.warn(`Could not find google-closure-compiler-${platform}/compiler! Falling back to Java version.`);
+      const platform = platformMap[process.platform];
+      console.warn(`Could not find google-closure-compiler-${platform}/compiler! Falling back to Java version.`);
+    }
   }
 
   return new Promise(function(resolve, reject) {
