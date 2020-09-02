@@ -336,10 +336,34 @@ const execPythonCmd = function(args) {
   });
 };
 
+/**
+ * Writes a Google Closure deps file.
+ * @param {Object} options The Closure compiler options.
+ * @param {string} outputFile The output file.
+ * @return {Promise} A promise that resolves when the file is written.
+ */
+const writeDeps = function(options, outputFile) {
+  if (!depsWriter || !fs.existsSync(depsWriter)) {
+    return Promise.reject('Could not locate depswriter.py!');
+  }
+
+  const roots = options.js.filter(notExclude).filter(notGoog).map(mapRootWithPrefix);
+  const args = [depsWriter, ...roots];
+
+  console.log('Writing Closure deps...');
+
+  return execPythonCmd(args).then(function(output) {
+    console.log(`Writing ${outputFile}`);
+
+    return fs.writeFileAsync(outputFile, output);
+  });
+};
+
 module.exports = {
-  compile: compile,
-  writeDebugLoader: writeDebugLoader,
-  createManifest: createManifest,
-  fileToLines: fileToLines,
-  readManifest: readManifest
+  compile,
+  writeDebugLoader,
+  writeDeps,
+  createManifest,
+  fileToLines,
+  readManifest
 };

@@ -4,7 +4,8 @@
   "description": "Helper functions for working with opensphere-build-resolver and the Google Closure Compiler",
   "main": "index.js",
   "bin": {
-    "os-compile": "./os-compile.js"
+    "os-compile": "./os-compile.js",
+    "os-gendeps": "./os-gendeps.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
