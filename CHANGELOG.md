@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v5.1.0...v5.2.0) (2020-09-03)
+
+
+### Features
+
+* **deps:** add script to write closure deps ([80c32ea](https://github.com/ngageoint/opensphere-build-closure-helper/commit/80c32ea02e50a69abd5d5c54da49937f023817bf))
+
 # [5.1.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v5.0.1...v5.1.0) (2020-05-07)
 
 
