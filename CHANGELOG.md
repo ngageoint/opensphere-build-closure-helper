@@ -1,3 +1,16 @@
+# [6.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v5.2.0...v6.0.0) (2020-09-08)
+
+
+### Features
+
+* **gcc:** update closure compiler to 20200830.0.0 ([151599d](https://github.com/ngageoint/opensphere-build-closure-helper/commit/151599d077dad22fd7635f9fa9786d21a0a8d5a3))
+
+
+### BREAKING CHANGES
+
+* **gcc:** The latest Closure Compiler has removed the useOfGoogBase error
+group, and changed the API for some Angular externs.
+
 # [5.2.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v5.1.0...v5.2.0) (2020-09-03)
 
 
