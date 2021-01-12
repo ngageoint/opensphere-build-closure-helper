@@ -1,3 +1,10 @@
+# [6.1.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v6.0.0...v6.1.0) (2021-01-12)
+
+
+### Features
+
+* **es6:** detect es6 modules declaring a Closure namespace ([012238a](https://github.com/ngageoint/opensphere-build-closure-helper/commit/012238a452eb0e74171c0714ee97e78139f154d6))
+
 # [6.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v5.2.0...v6.0.0) (2020-09-08)
 
 
