@@ -16,7 +16,7 @@ const closureLibPath = path.dirname(require.resolve(path.join('google-closure-li
 const closureSrcPath = path.join(closureLibPath, 'closure', 'goog');
 const closureBinPath = path.join(closureLibPath, 'closure', 'bin', 'build');
 const closureBuilder = path.join(closureBinPath, 'closurebuilder.py');
-const depsWriter = path.join(closureBinPath, 'depswriter.py');
+const depsWriter = path.join(__dirname, 'depswriter', 'depswriter.py');
 
 /**
  * Run the Closure Compiler with the provided options.
