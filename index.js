@@ -131,7 +131,7 @@ const writeDebugLoader = function(options, outputFile) {
     return Promise.reject('Could not locate depswriter.py!');
   }
 
-  const roots = options.js.filter(notExclude).filter(notGoog).map(mapRootWithPrefix);
+  const roots = options.js.filter(notExclude).filter(notGoog).map(mapRootWithPrefix).filter((root) => !!root);
   const args = [depsWriter, ...roots];
 
   console.log('Creating debug application loader...');
@@ -278,15 +278,20 @@ const mapRoot = function(pattern) {
 };
 
 /**
- * Convert a glob pattern to a `--root_with_prefix` argument for `depswriter.py`.
+ * Convert a glob pattern to a `--root_with_prefix` argument for `depswriter.py`. If the pattern cannot be resolved
+ * to a directory, an empty string will be returned to avoid errors in depswriter.
  * @param {string} pattern The pattern
  * @return {boolean} The argument
  */
 const mapRootWithPrefix = function(pattern) {
-  pattern = pattern.replace(/\*\*\.js$/, '');
+  pattern = pattern.replace(/[^\\/]+\.js$/, '');
 
-  const relPath = path.relative(closureSrcPath, pattern);
-  return `--root_with_prefix=${pattern} ${relPath}`;
+  if (fs.existsSync(pattern)) {
+    const relPath = path.relative(closureSrcPath, pattern);
+    return `--root_with_prefix=${pattern} ${relPath}`;
+  }
+
+  return '';
 };
 
 /**
@@ -347,7 +352,7 @@ const writeDeps = function(options, outputFile) {
     return Promise.reject('Could not locate depswriter.py!');
   }
 
-  const roots = options.js.filter(notExclude).filter(notGoog).map(mapRootWithPrefix);
+  const roots = options.js.filter(notExclude).filter(notGoog).map(mapRootWithPrefix).filter((root) => !!root);
   const args = [depsWriter, ...roots];
 
   console.log('Writing Closure deps...');
