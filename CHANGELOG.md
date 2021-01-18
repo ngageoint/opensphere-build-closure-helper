@@ -1,3 +1,10 @@
+## [6.1.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v6.1.0...v6.1.1) (2021-01-18)
+
+
+### Bug Fixes
+
+* **deps:** only add prefixes for directories that exist ([b7fa44a](https://github.com/ngageoint/opensphere-build-closure-helper/commit/b7fa44a210ba332f9f995f9884b78f4c6aab8703))
+
 # [6.1.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v6.0.0...v6.1.0) (2021-01-12)
 
 
