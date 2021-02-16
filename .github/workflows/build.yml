@@ -36,11 +36,6 @@ jobs:
     - name: Install Dependencies
       run: yarn --frozen-lockfile --prefer-offline
 
-    - name: Lint Commits
-      uses: wagoid/commitlint-github-action@v2
-      env:
-        NODE_PATH: ${{ github.workspace }}/node_modules
-
     - name: Lint Source
       run: yarn lint
 
