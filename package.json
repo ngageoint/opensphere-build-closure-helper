@@ -57,8 +57,8 @@
   },
   "dependencies": {
     "bluebird": "^3.7.2",
-    "google-closure-compiler": "20200830.0.0",
-    "google-closure-library": "20210106.0.0"
+    "google-closure-compiler": "20210406.0.0",
+    "google-closure-library": "20210302.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
