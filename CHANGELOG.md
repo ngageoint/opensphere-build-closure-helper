@@ -1,3 +1,18 @@
+# [7.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v6.1.1...v7.0.0) (2021-04-21)
+
+
+### Features
+
+* **gcc:** update closure compiler to 20210406 ([339dd1c](https://github.com/ngageoint/opensphere-build-closure-helper/commit/339dd1c58b06c85e202f7567868b5081dabf82b0))
+* **goog:** update closure library to 20210406 ([8cdb5f8](https://github.com/ngageoint/opensphere-build-closure-helper/commit/8cdb5f8580389c980c5b478bdd4b40ee6769f2e0))
+
+
+### BREAKING CHANGES
+
+* **gcc:** The updated compiler will find additional errors from previous
+versions, and is not compatible with old versions of the Closure library.
+Projects will need to update the library and resolve build errors.
+
 ## [6.1.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v6.1.0...v6.1.1) (2021-01-18)
 
 
