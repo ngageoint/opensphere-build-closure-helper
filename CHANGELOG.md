@@ -1,3 +1,10 @@
+# [7.1.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v7.0.0...v7.1.0) (2021-07-06)
+
+
+### Features
+
+* **closure:** copy closurebuilder.py so it works with es modules ([46fcc7e](https://github.com/ngageoint/opensphere-build-closure-helper/commit/46fcc7e20c636a497e87476a834fcc71452660c3))
+
 # [7.0.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v6.1.1...v7.0.0) (2021-04-21)
 
 
