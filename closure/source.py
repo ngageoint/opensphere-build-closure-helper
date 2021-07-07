@@ -35,7 +35,7 @@ _MODULE_REGEX = re.compile(_BASE_REGEX_STRING % 'module')
 _ES6_REGEX = re.compile(_BASE_REGEX_STRING % 'declareModuleId')
 _PROVIDE_REGEX = re.compile(_BASE_REGEX_STRING % 'provide')
 
-_REQUIRE_REGEX_STRING = (r'^\s*(?:(?:var|let|const)\s+[a-zA-Z0-9$_,:{}\s]*'
+_REQUIRE_REGEX_STRING = (r'^\s*(?:(?:(?:var|let|const)\s+)?[a-zA-Z0-9$_,:{}\s]*'
                          r'\s*=\s*)?goog\.require\(\s*[\'"](.+)[\'"]\s*\)')
 _REQUIRES_REGEX = re.compile(_REQUIRE_REGEX_STRING)
 
