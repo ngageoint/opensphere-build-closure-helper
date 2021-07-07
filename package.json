@@ -1,6 +1,6 @@
 {
   "name": "opensphere-build-closure-helper",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "Helper functions for working with opensphere-build-resolver and the Google Closure Compiler",
   "main": "index.js",
   "bin": {

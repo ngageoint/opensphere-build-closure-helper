@@ -1,3 +1,10 @@
+## [7.1.1](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v7.1.0...v7.1.1) (2021-07-07)
+
+
+### Bug Fixes
+
+* **closure:** detect multiline goog.require statements ([965f163](https://github.com/ngageoint/opensphere-build-closure-helper/commit/965f163bfbda4ee4960c2ae9bfd7a9fc63387fe5))
+
 # [7.1.0](https://github.com/ngageoint/opensphere-build-closure-helper/compare/v7.0.0...v7.1.0) (2021-07-06)
 
 
