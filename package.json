@@ -70,6 +70,6 @@
     "eslint-config-google": "^0.14.0",
     "husky": "^7.0.4",
     "pinst": "^2.1.6",
-    "semantic-release": "^17.3.9"
+    "semantic-release": "^19.0.3"
   }
 }
